@@ -57,8 +57,8 @@ switch(argument0)
                     var xtarg = x+lengthdir_x(spd, angle_to_check);
                     var ytarg = y+lengthdir_y(spd, angle_to_check);
                     
-                    moveh = lengthdir_x(spd, angle_to_check);
-                    movev = lengthdir_y(spd, angle_to_check);
+                    //moveh = lengthdir_x(spd, angle_to_check);
+                    //movev = lengthdir_y(spd, angle_to_check);
                     
                     if !place_meeting(xtarg,ytarg,obj_solid) {
                         
