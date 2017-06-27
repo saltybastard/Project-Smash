@@ -34,16 +34,18 @@ place = places.Air
 moveh = 0;
 movev = 0;
 
-ground_speed_max = 500;
-ground_accelerating_speed = 50;
-ground_deaccelerating_rate = 0.5;
+ground_spd_max = 500;
+ground_acc_spd = 50;
+ground_deacc_rate = 0.1;
+ground_deacc_spd = 5;
 
 ground_jump = 500;
-ground_jump_horisontal_reduction = 0.7;
+ground_jump_xreduct = 0.1;
 
-air_speed_max = 1000;
-air_accelerating_speed = 30;
-air_deaccelerating_rate = 0.1;
+air_spd_max = 500;
+air_acc_spd = 15;
+air_deacc_rate = 0.01;
+air_deacc_spd = 2;
 
 gravel = 9.82;
 
@@ -152,8 +154,13 @@ switch(place){
     case places.Ground: yy = "Ground"; break;
     case places.Air: yy = "Air"; break;
 }
+xx = string(moveh);
+zz = string(movev);
+rr = ","
 draw_set_font(font0);
 draw_text(x,y,yy)
+draw_text(x-16,y-64,xx+rr+zz)
+
 </string>
           </argument>
         </arguments>

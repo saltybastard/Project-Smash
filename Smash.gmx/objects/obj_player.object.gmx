@@ -279,7 +279,7 @@ if place_meeting(x,y+1,obj_solid) {
 
 //Jump cancell stuff
 if (!vspd &gt; 0) and (!jkeyh){vspd = max(vspd, -jspd/2)}
-
+/*
 scr_collision();
 </string>
           </argument>

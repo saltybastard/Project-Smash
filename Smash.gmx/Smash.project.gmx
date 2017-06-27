@@ -42,7 +42,7 @@
       <scripts name="Movement">
         <script>scripts\scr_move_smooth.gml</script>
         <script>scripts\scr_acc_deacc.gml</script>
-        <script>scripts\scr_collision.gml</script>
+        <script>scripts\scr_collisionold.gml</script>
         <scripts name="Her0">
           <script>scripts\scr_hero_her0.gml</script>
         </scripts>
