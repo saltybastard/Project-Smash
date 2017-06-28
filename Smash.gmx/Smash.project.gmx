@@ -41,7 +41,6 @@
     </scripts>
     <scripts name="Input">
       <script>scripts\scr_controller_input.gml</script>
-      <script>scripts\scr_keyboard_input.gml</script>
     </scripts>
     <scripts name="Archive">
       <script>scripts\scr_collision_arc.gml</script>

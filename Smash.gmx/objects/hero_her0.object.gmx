@@ -73,7 +73,7 @@ gravel = 9.82;
             <kind>1</kind>
             <string>switch (state)
 {
-    case states.Normal: scr_controller_input(); scr_hero_her0(); break;
+    case states.Normal: scr_controller_input(); scr_keyboard_input(); scr_hero_her0(); break;
 //    case states.Attacking: scr_hero_Attacking(); break;
 //    case states.Stunned: scr_hero_Stunned(); break;
 }
@@ -121,11 +121,11 @@ gravel = 9.82;
           </argument>
           <argument>
             <kind>0</kind>
-            <string>inp_lsx*120</string>
+            <string>inp_xmove*120</string>
           </argument>
           <argument>
             <kind>0</kind>
-            <string>inp_lsy*120</string>
+            <string>inp_ymove*120</string>
           </argument>
           <argument>
             <kind>0</kind>

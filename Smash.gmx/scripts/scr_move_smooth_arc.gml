@@ -1,5 +1,5 @@
 
-scr_input();
+//scr_input();
 var seconds_passed = delta_time/1000000;
 var move_speed_this_frame = move_speed*seconds_passed*point_distance(0,0,inp_lsx,inp_lsy);
 var move_dir = point_direction(0,0,inp_lsx,inp_lsy);

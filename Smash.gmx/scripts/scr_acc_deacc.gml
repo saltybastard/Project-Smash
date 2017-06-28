@@ -58,12 +58,8 @@ switch(argument0)
                     var ytarg = y+lengthdir_y(spd, angle_to_check);
                     
                     //moveh = lengthdir_x(spd, angle_to_check);
-<<<<<<< HEAD
                     //movev = lengthdir_y(spd, angle_to_check);     //Causes bug
-=======
-                    //movev = lengthdir_y(spd, angle_to_check);
->>>>>>> 29daad9cfe977a1d0be7891365c6788aff2aa5e0
-                    
+         
                     if !place_meeting(xtarg,ytarg,obj_solid) {
                         
                         /*****************************************************/

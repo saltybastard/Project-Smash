@@ -9,10 +9,10 @@ switch (place)
 /****************************************************************************************/
         ///Accelerate, Deaccelerate
         moveh += scr_acc_deacc(ground_spd_max,ground_acc_spd,ground_deacc_rate,ground_deacc_spd,
-        moveh/seconds_passed,inp_lsx) * seconds_passed;
+        moveh/seconds_passed,inp_xmove) * seconds_passed;
 
         ///Jump
-        if inp_buttd and !place_meeting(x+moveh*ground_jump_xreduct,y-ground_jump*seconds_passed,obj_solid){
+        if inp_b[3] and !place_meeting(x+moveh*ground_jump_xreduct,y-ground_jump*seconds_passed,obj_solid){
             moveh += moveh*ground_jump_xreduct;
             movev -= ground_jump*seconds_passed; 
             
@@ -33,7 +33,7 @@ switch (place)
 /****************************************************************************************/
         ///Fly left or right
         moveh += scr_acc_deacc(air_spd_max,air_acc_spd,air_deacc_rate,air_deacc_spd,
-        moveh/seconds_passed,inp_lsx) * seconds_passed;
+        moveh/seconds_passed,inp_xmove) * seconds_passed;
 
         ///Fall
         movev += gravel * seconds_passed;
