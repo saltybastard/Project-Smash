@@ -28,25 +28,24 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_input.gml</script>
     <scripts name="System">
       <script>scripts\scr_center_object.gml</script>
       <script>scripts\scr_window_resize.gml</script>
       <script>scripts\scr_enumerator.gml</script>
     </scripts>
+    <scripts name="Movement">
+      <script>scripts\scr_acc_deacc.gml</script>
+    </scripts>
     <scripts name="Hero Script">
-      <script>scripts\scr_hero_Normal.gml</script>
-      <scripts name="Brawling">
-        <script>scripts\scr_brawling_her0.gml</script>
-      </scripts>
-      <scripts name="Movement">
-        <script>scripts\scr_move_smooth.gml</script>
-        <script>scripts\scr_acc_deacc.gml</script>
-        <script>scripts\scr_collisionold.gml</script>
-        <scripts name="Her0">
-          <script>scripts\scr_hero_her0.gml</script>
-        </scripts>
-      </scripts>
+      <script>scripts\scr_hero_her0.gml</script>
+    </scripts>
+    <scripts name="Input">
+      <script>scripts\scr_controller_input.gml</script>
+      <script>scripts\scr_keyboard_input.gml</script>
+    </scripts>
+    <scripts name="Archive">
+      <script>scripts\scr_collision_arc.gml</script>
+      <script>scripts\scr_move_smooth_arc.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
