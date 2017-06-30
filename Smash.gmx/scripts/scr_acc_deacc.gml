@@ -52,30 +52,33 @@ switch(argument0)
             var spd = point_distance(0,0,moveh,movev);
             
             for ( var angle = sweep_interval; angle <= 45; angle += sweep_interval) { 
-                for ( var multiplier = -1; multiplier <= 1; multiplier += 2) {      
-                    var angle_to_check = dir+angle*multiplier;
-                    var xtarg = x+lengthdir_x(spd, angle_to_check);
-                    var ytarg = y+lengthdir_y(spd, angle_to_check);
-                    
-                    //moveh = lengthdir_x(spd, angle_to_check);
-                    //movev = lengthdir_y(spd, angle_to_check);     //Causes bug
-         
-                    if !place_meeting(xtarg,ytarg,obj_solid) {
+                for ( var multiplier = -1; multiplier <= 1; multiplier += 2) { 
+                         
+                        var angle_to_check = dir+angle*multiplier;
                         
-                        /*****************************************************/
-                        //Making sure not to jump when no jump needs to be done
-                        var gap = 0;
-                        var limit = 5;
-                        while !place_meeting(xtarg,ytarg+gap+1,obj_solid) and (gap < limit){
-                            {gap += 1; audio_play_sound(sou_blip, 1, 0);}
+                        var xtarg = x+lengthdir_x(spd, angle_to_check);
+                        var ytarg = y+lengthdir_y(spd, angle_to_check);
+                     
+                        //moveh = lengthdir_x(spd, angle_to_check);
+                        //movev = lengthdir_y(spd, angle_to_check);     //Causes bug
+             
+                        if !place_meeting(xtarg,ytarg,obj_solid) {
+                        
+                            /*****************************************************/
+                            //Making sure not to jump when no jump needs to be done
+                            var gap = 0;
+                            var limit = 5;
+                            while !place_meeting(xtarg,ytarg+gap+1,obj_solid) and (gap < limit){
+                                {gap += 1; audio_play_sound(sou_blip, 1, 0);}
+                            }
+                            if gap = limit {gap = 0;}
+                            /*****************************************************/
+                            
+                            x = xtarg;
+                            y = ytarg+gap;
+                            exit;
                         }
-                        if gap = limit {gap = 0;}
-                        /*****************************************************/
-                        
-                        x = xtarg;
-                        y = ytarg+gap;
-                        exit;
-                    }
+                    
                 }
             }
         

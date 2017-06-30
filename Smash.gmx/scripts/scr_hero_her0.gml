@@ -36,7 +36,16 @@ switch (place)
         moveh/seconds_passed,inp_xmove) * seconds_passed;
 
         ///Fall
-        movev += gravel * seconds_passed;
+        movev += gravel*seconds_passed;
+        if !inp_b[3] {
+            if movev < 0 {movev = max(movev,-ground_jump/2*seconds_passed);}
+            if movev > 10 { movev += gravel * seconds_passed;}
+        } else {
+            movev = min(movev,hover/2*seconds_passed);
+        }
+        if 2 > movev and movev > -2 { movev += gravel * seconds_passed;}
+        
+        
         
         scr_collision(places.Air);
 /****************************************************************************************/

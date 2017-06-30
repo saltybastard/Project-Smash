@@ -25,13 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>device = 0;
-gamepad_set_axis_deadzone(device, 0.2);
-state = states.Normal
-place = places.Air
-
-
-moveh = 0;
+            <string>moveh = 0;
 movev = 0;
 
 ground_spd_max = 500;
@@ -39,7 +33,7 @@ ground_acc_spd = 50;
 ground_deacc_rate = 0.1;
 ground_deacc_spd = 5;
 
-ground_jump = 500;
+ground_jump = 750;
 ground_jump_xreduct = 0.1;
 
 air_spd_max = 500;
@@ -47,7 +41,15 @@ air_acc_spd = 15;
 air_deacc_rate = 0.01;
 air_deacc_spd = 2;
 
-gravel = 9.82;
+gravel = 15;//m/s^2
+hover = 400
+
+/*********TEMPORARY CODE*********/
+device = 0;
+gamepad_set_axis_deadzone(device, 0.2);
+state = states.Normal
+place = places.Air
+/*********TEMPORARY CODE*********/
 
 </string>
           </argument>
@@ -73,7 +75,7 @@ gravel = 9.82;
             <kind>1</kind>
             <string>switch (state)
 {
-    case states.Normal: scr_controller_input(); scr_keyboard_input(); scr_hero_her0(); break;
+    case states.Normal: scr_controller_input(); /*scr_keyboard_input();*/ scr_input_interpreter(); scr_hero_her0(); break;
 //    case states.Attacking: scr_hero_Attacking(); break;
 //    case states.Stunned: scr_hero_Stunned(); break;
 }

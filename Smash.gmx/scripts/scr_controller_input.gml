@@ -75,3 +75,11 @@ inp_b[0] = keyboard_check(ord('Z'));
 inp_b[1] = keyboard_check(ord('X'));
 inp_b[2] = keyboard_check(ord('C'));
 inp_b[3] = keyboard_check(vk_space);
+#define scr_input_interpreter
+/***************************************************
+  This script is used to notice special combinations
+  of input and translate into others. This can be
+  used by all heros and doesnt cover special attacks.
+ ***************************************************/
+ 
+ 
