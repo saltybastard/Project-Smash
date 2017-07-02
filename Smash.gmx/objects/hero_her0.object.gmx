@@ -42,7 +42,8 @@ air_deacc_rate = 0.01;
 air_deacc_spd = 2;
 
 gravel = 15;//m/s^2
-hover = 400
+hover_speed = 200
+fall_speed = 400 
 
 /*********TEMPORARY CODE*********/
 device = 0;

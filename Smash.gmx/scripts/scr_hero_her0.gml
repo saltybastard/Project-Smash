@@ -41,7 +41,7 @@ switch (place)
             if movev < 0 {movev = max(movev,-ground_jump/2*seconds_passed);}
             if movev > 10 { movev += gravel * seconds_passed;}
         } else {
-            movev = min(movev,hover/2*seconds_passed);
+            movev = min(movev,hover_speed*seconds_passed);
         }
         if 2 > movev and movev > -2 { movev += gravel * seconds_passed;}
         

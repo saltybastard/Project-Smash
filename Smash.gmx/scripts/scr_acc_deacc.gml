@@ -69,7 +69,7 @@ switch(argument0)
                             var gap = 0;
                             var limit = 5;
                             while !place_meeting(xtarg,ytarg+gap+1,obj_solid) and (gap < limit){
-                                {gap += 1; audio_play_sound(sou_blip, 1, 0);}
+                                gap += 1;
                             }
                             if gap = limit {gap = 0;}
                             /*****************************************************/
