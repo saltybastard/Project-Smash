@@ -21,7 +21,18 @@
         <sprite>sprites\spr_her0_slide</sprite>
       </sprites>
     </sprites>
-    <sprite>sprites\spr_solid</sprite>
+    <sprites name="Hitbox">
+      <sprite>sprites\spr_hitbox</sprite>
+      <sprite>sprites\spr_invinciblebox</sprite>
+      <sprite>sprites\spr_hurtbox</sprite>
+      <sprite>sprites\spr_terrainbox</sprite>
+      <sprite>sprites\spr_intangiblebox</sprite>
+      <sprite>sprites\spr_reflectbox</sprite>
+      <sprite>sprites\spr_absorbbox</sprite>
+      <sprite>sprites\spr_shieldbox</sprite>
+      <sprite>sprites\spr_solidbox</sprite>
+      <sprite>sprites\spr_grapbox</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background2</background>
@@ -51,15 +62,22 @@
     <font>fonts\font0</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_camera_and_gamemaster</object>
-    <object>objects\obj_solid</object>
+    <objects name="Hitbox">
+      <object>objects\obj_hitbox</object>
+      <object>objects\obj_invinciblebox</object>
+      <object>objects\obj_hurtbox</object>
+      <object>objects\obj_solid</object>
+    </objects>
+    <objects name="System">
+      <object>objects\obj_camera_and_gamemaster</object>
+    </objects>
     <objects name="Plattform">
       <object>objects\plattform_0</object>
     </objects>
     <objects name="Hero">
       <object>objects\hero_her0</object>
+      <object>objects\obj_player</object>
     </objects>
-    <object>objects\obj_player</object>
   </objects>
   <rooms name="rooms">
     <rooms name="Arena">

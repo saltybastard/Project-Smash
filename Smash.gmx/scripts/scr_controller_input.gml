@@ -10,7 +10,8 @@ if inp_d[0] or inp_d[1] or inp_d[2] or inp_d[3]{
     
     inp_xmove = lengthdir_x(1,dir);
     inp_ymove = lengthdir_y(1,dir);
-}//Is overitten by:
+}else {inp_xmove = 0; inp_ymove = 0;}
+//Is overitten by:
 
 //(Move) Left stick 
 inp_xmove = gamepad_axis_value(device,gp_axislh);
@@ -50,7 +51,7 @@ if inp_move[0] or inp_move[1] or inp_move[2] or inp_move[3]{
 
     inp_xmove = lengthdir_x(1,dir);
     inp_ymove = lengthdir_y(1,dir);
-}
+}else {inp_xmove = 0; inp_ymove = 0;}
 
 //(Attack) QWER keys?
 inp_attack[0] = keyboard_check(vk_left);
@@ -75,6 +76,7 @@ inp_b[0] = keyboard_check(ord('Z'));
 inp_b[1] = keyboard_check(ord('X'));
 inp_b[2] = keyboard_check(ord('C'));
 inp_b[3] = keyboard_check(vk_space);
+
 #define scr_input_interpreter
 /***************************************************
   This script is used to notice special combinations
