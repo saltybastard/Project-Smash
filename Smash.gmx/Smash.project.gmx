@@ -17,7 +17,7 @@
     </sprites>
     <sprites name="Heroes">
       <sprites name="Her0">
-        <sprite>sprites\spr_her0</sprite>
+        <sprite>sprites\spr_stand_her0</sprite>
         <sprite>sprites\spr_her0_slide</sprite>
       </sprites>
     </sprites>
