@@ -64,12 +64,11 @@
   <objects name="objects">
     <objects name="Hitbox">
       <object>objects\obj_hitbox</object>
-      <object>objects\obj_invinciblebox</object>
-      <object>objects\obj_hurtbox</object>
       <object>objects\obj_solid</object>
     </objects>
     <objects name="System">
       <object>objects\obj_camera_and_gamemaster</object>
+      <object>objects\obj_options_menu</object>
     </objects>
     <objects name="Plattform">
       <object>objects\plattform_0</object>
@@ -80,8 +79,11 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <rooms name="Start Menu">
+      <room>rooms\room_start</room>
+    </rooms>
     <rooms name="Arena">
-      <room>rooms\room0</room>
+      <room>rooms\arena_xp</room>
     </rooms>
   </rooms>
   <help>
