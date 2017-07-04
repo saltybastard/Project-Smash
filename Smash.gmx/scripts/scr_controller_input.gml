@@ -162,3 +162,19 @@ inp_b[0] = keyboard_check(ord('Z'));
 inp_b[1] = keyboard_check(ord('X'));
 inp_b[2] = keyboard_check(ord('C'));
 inp_b[3] = keyboard_check(vk_space);
+#define scr_input_shift
+var input
+if keyboard_check(vk_anykey) input = "keyboard";
+
+for ( var i = gp_face1; i < gp_axisrv; i++ ) {
+    if ( gamepad_button_check( 0, i ) ) input = "gamepad";
+}
+
+for ( var i = gp_face1; i < gp_axisrv; i++ ) {
+    if ( gamepad_button_check( 0, i ) ) input = "gamepad";
+}
+
+switch(input){
+    case "keyboard": scr_keyboard_input(); break;
+    case "gamepad": scr_controller_input(); break;
+}

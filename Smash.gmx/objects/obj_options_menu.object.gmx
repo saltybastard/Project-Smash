@@ -25,15 +25,51 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>menustart[0] = "Play";
+            <string>var menutheme = 0; 
+var date = date_current_datetime();
+if (date_get_month(date) = 9 and date_get_day(date) = 22) or 
+    date_get_month(date) = 3 and (date_get_day(date) = 13 or date_get_day(date) = 24)
+    {menutheme = "DS"}
+switch(menutheme)
+{   default: { //Default
+    space = 64;
+    mpos = 0;
+    }break;
+    case "DS": { //DS
+    space = 64;
+    mpos = 0;
+    }break;
+}
+
+menustart[0] = "Play";
 menustart[1] = "Options";
 menustart[2] = "Tournament"
 menustart[3] = "Quit"
 
-space = 64;
-mpos = 0;
-
 device = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Run alarm
 </string>
           </argument>
         </arguments>
@@ -59,7 +95,8 @@ device = 0;
             <string>scr_controller_input();
 
 var move = inp_d[1] - inp_d[3];
-if move != 0 {
+if move != 0 and alarm[11] = -1{
+    alarm[11] = room_speed * 0.5
     mpos += move;
     if (mpos &lt; 0) mpos = array_length_1d(menustart) - 1;
     if (mpos &gt; array_length_1d(menustart) - 1) mpos = 0;
