@@ -11,6 +11,9 @@
     <sprites name="System">
       <sprite>sprites\spr_camera</sprite>
       <sprite>sprites\spr_system_yellow</sprite>
+      <sprites name="Menu">
+        <sprite>sprites\spr_menublue</sprite>
+      </sprites>
     </sprites>
     <sprites name="Plattform">
       <sprite>sprites\spr_plattform_0</sprite>
@@ -33,6 +36,7 @@
       <sprite>sprites\spr_solidbox</sprite>
       <sprite>sprites\spr_grapbox</sprite>
     </sprites>
+    <sprite>sprites\spr_control</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background2</background>
@@ -69,7 +73,8 @@
     </objects>
     <objects name="System">
       <object>objects\obj_camera_and_gamemaster</object>
-      <object>objects\obj_options_menu</object>
+      <object>objects\obj_menu</object>
+      <object>objects\obj_control</object>
     </objects>
     <objects name="Plattform">
       <object>objects\plattform_0</object>
