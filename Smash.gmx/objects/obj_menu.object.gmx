@@ -30,35 +30,44 @@ var date = date_current_datetime();
 if (date_get_month(date) = 9 and date_get_day(date) = 22) or 
     date_get_month(date) = 3 and (date_get_day(date) = 13 or date_get_day(date) = 24)
     {menutheme = "DS"}
+
 switch(menutheme)
 {   default: { //Default
     space = 64;
-    mpos = 0;
     }break;
     case "DS": { //DS
     space = 64;
-    mpos = 0;
     }break;
 }
 
-menustart[0] = "Play";
-menustart[1] = "Options";
-menustart[2] = "Tournament"
-menustart[3] = "Quit"
+START = 0;
+PLAY = 1;
+    PRACTICE = 1;
+    DUEL = 2;
+    TOURNAMENT = 3;
+OPTIONS = 2;
+    FULLSCREEN = 1;
+    SOUND = 2;
+CREDIT = 3;
+QUIT = 4;
 
-menuoption[0] = "Fullscreen"
-menuoption[1] = "Sound"
+chapter = 0;
+mpos = 1;
 
-enum menu{
-    start,
-    option
-}
+menustart[START,PLAY] = "Play";
+menustart[START,OPTIONS] = "Options";
+menustart[START,CREDIT] = "Credit";
+menustart[START,QUIT] = "Quit";
 
-setting = menu.start;
+menustart[PLAY,DUEL] = "Duel"
+menustart[PLAY,PRACTICE] = "Practice"
+menustart[PLAY,TOURNAMENT] = "Tournament"
 
-device = 0;
+menustart[OPTIONS,FULLSCREEN] = "Fullscreen"
+menustart[OPTIONS,SOUND] = "Sound"
 
 //***TEMPORARY CODE***//
+device = 0;
 gamepad_set_axis_deadzone(device, 0.2);
 //********************//
 
@@ -108,50 +117,37 @@ scr_input_zero();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if mb_any or scr_mouse_moving(){
-    var input = 0;
-}
-if vk_anykey or scr_controller_using(){
-    var input = 1;
-}
+            <string>if mb_any or scr_mouse_moving(){var input = 0;}
+if vk_anykey or scr_controller_using(){var input = 1;}
 
+//****INPUTS****//
 switch(input){
     case 0:{break;}
     case 1:{
         scr_input_shift();
-        
         var movey = inp_d[1] - inp_d[3] - sign(inp_yattack) - sign(inp_xmove);
         if movey != 0 and alarm[11] = -1 {
             alarm[11] = room_speed * 0.075
             mpos -= movey;
-            if (mpos &lt; 0) mpos = array_length_1d(menustart) - 1;
-            if (mpos &gt; array_length_1d(menustart) - 1) mpos = 0;
-        }
-        
-        break;
-    }
-}
+            if (mpos &lt; 1) mpos = array_length_2d(menustart,chapter) -1;
+            if (mpos &gt; array_length_2d(menustart,chapter) -1) mpos = 1;
+}break;}}
 
-var enter = max(inp_b[3]);
+//****Navigate*through*menus****//
+var {in = max(inp_b[3]); out = max(inp_b[0])}
 
-if enter {
-    switch(setting){
-    
-    case menu.start: switch(menustart[mpos])
-        {   case "Play": break;
-            case "Options": setting = menu.option break;
-            case "Tournament": break;
-            case "Quit": game_end(); break;
-        }break;
-    
-    case menu.option: switch(mpos)
-        {   case 0: break;
-            case 1: break;
-        }break;
-    }
-}
-
-
+if in or out {switch(menustart[chapter,mpos]){
+case "Start":   {break;}
+    case "Play":    {if in {chapter = PLAY;} if out {} break;}
+        case "Duel":        {if in {} if out {chapter = 0;} break;}
+        case "Practice":    {if in {} if out {chapter = 0;} break;}
+        case "Tournament":  {if in {} if out {chapter = 0;} break;}
+    case "Options":  {if in {chapter = OPTIONS;} if out {} break;}
+        case "Fullscreen":  {if in {} if out {chapter = 0;} break;}
+        case "Sound":       {if in {} if out {chapter = 0;} break;}
+    case "Credit":  {if in {} if out {} break;}
+    case "Quit":    {if in {game_end()} if out {} break;}
+}}
 </string>
           </argument>
         </arguments>
@@ -178,18 +174,10 @@ if enter {
 draw_set_valign(fa_middle);
 draw_set_font(font0);
 draw_set_color(c_white);
-var menupage
-var m = 0;
 
-switch(setting){
-    case menu.start: menupage = string(menustart[m]);
-    case menu.option: menupage = string(menuoption[m]);
-}
-
-for ( m = 0; m &lt; array_length_1d(menupage) m++ )
-    {draw_text(x + space, y + (m * space),string(menupage))}
-    
-draw_sprite(sprite_index, 0 , x + 16, y + mpos * space);
+for ( var m = 1; m &lt; array_length_2d(menustart,chapter); m++ )
+    {draw_text(x + space, y + (m * space),menustart[chapter,m])}
+    draw_sprite(sprite_index, 0 , x + 16, y + mpos * space);
 </string>
           </argument>
         </arguments>
