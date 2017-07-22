@@ -144,7 +144,7 @@ switch(input){
     case 0:{break;}
     case 1:{
         scr_input_shift();
-        var movey = inp_d[1] - inp_d[3] - sign(inp_yattack) - sign(inp_xmove);
+        var movey = inp_d[1] - inp_d[3] - sign(inp_yattack) - sign(inp_ymove);
         if movey != 0 and alarm[11] = -1 {
             alarm[11] = room_speed * 0.075
             mpos -= movey;
@@ -153,13 +153,13 @@ switch(input){
 }break;}}
 
 //****Navigate*through*menus****//
-var {in = max(inp_b[3]); out = max(inp_b[0])}
+var {in = max(inp_bpressed[3]); out = max(inp_bpressed[0])}
 if out {chapter = START;} else
 if in {switch(menustart[chapter,mpos]){
 case "Start":   {break;}
     case "Play":    {if in {chapter = PLAY;} break;}
         case "Duel":        {if in {} break;}
-        case "Practice":    {if in {} break;}
+        case "Practice":    {if in {room_goto(arena_xp)} break;}
         case "Tournament":  {if in {} break;}
     case "Options":  {if in {chapter = OPTIONS;} break;}
         case "Fullscreen":  {if in {} break;}

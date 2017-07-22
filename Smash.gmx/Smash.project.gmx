@@ -10,9 +10,10 @@
   <sprites name="sprites">
     <sprites name="System">
       <sprite>sprites\spr_camera</sprite>
+      <sprite>sprites\spr_control</sprite>
       <sprite>sprites\spr_system_yellow</sprite>
       <sprites name="Menu">
-        <sprite>sprites\spr_menublue</sprite>
+        <sprite>sprites\spr_menuselect</sprite>
       </sprites>
     </sprites>
     <sprites name="Plattform">
@@ -36,7 +37,6 @@
       <sprite>sprites\spr_solidbox</sprite>
       <sprite>sprites\spr_grapbox</sprite>
     </sprites>
-    <sprite>sprites\spr_control</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background2</background>

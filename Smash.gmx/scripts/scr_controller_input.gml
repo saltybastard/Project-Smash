@@ -11,7 +11,16 @@ if inp_d[0] or inp_d[1] or inp_d[2] or inp_d[3]{
     inp_xmove = lengthdir_x(1,dir);
     inp_ymove = lengthdir_y(1,dir);
 }else {inp_xmove = 0; inp_ymove = 0;}
-//Is overitten by:
+
+inp_dpressed[0] = gamepad_button_check_pressed(device,gp_padr);
+inp_dpressed[1] = gamepad_button_check_pressed(device,gp_padu);
+inp_dpressed[2] = gamepad_button_check_pressed(device,gp_padl);
+inp_dpressed[3] = gamepad_button_check_pressed(device,gp_padd);
+
+inp_dreleased[0] = gamepad_button_check_released(device,gp_padr);
+inp_dreleased[1] = gamepad_button_check_released(device,gp_padu);
+inp_dreleased[2] = gamepad_button_check_released(device,gp_padl);
+inp_dreleased[3] = gamepad_button_check_released(device,gp_padd);
 
 //(Move) Left stick 
 inp_xmove = gamepad_axis_value(device,gp_axislh);
@@ -30,6 +39,16 @@ inp_b[0] = gamepad_button_check(device,gp_face2);
 inp_b[1] = gamepad_button_check(device,gp_face4);
 inp_b[2] = gamepad_button_check(device,gp_face3);
 inp_b[3] = gamepad_button_check(device,gp_face1);
+
+inp_bpressed[0] = gamepad_button_check_pressed(device,gp_face2);
+inp_bpressed[1] = gamepad_button_check_pressed(device,gp_face4);
+inp_bpressed[2] = gamepad_button_check_pressed(device,gp_face3);
+inp_bpressed[3] = gamepad_button_check_pressed(device,gp_face1);
+
+inp_breleased[0] = gamepad_button_check_released(device,gp_face2);
+inp_breleased[1] = gamepad_button_check_released(device,gp_face4);
+inp_breleased[2] = gamepad_button_check_released(device,gp_face3);
+inp_breleased[3] = gamepad_button_check_released(device,gp_face1);
 
 //Triggers
 inp_rtri = gamepad_axis_value(device,gp_shoulderrb);
