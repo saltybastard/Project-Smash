@@ -80,8 +80,9 @@
       <object>objects\plattform_0</object>
     </objects>
     <objects name="Hero">
-      <object>objects\hero_her0</object>
       <object>objects\obj_player</object>
+      <object>objects\hero_her0</object>
+      <object>objects\obj_playerold</object>
     </objects>
   </objects>
   <rooms name="rooms">
