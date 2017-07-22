@@ -28,60 +28,7 @@
             <string>x = room_width / 2;
 y = room_height / 2;
 
-var menutheme = 0; 
-var date = date_current_datetime();
-if (date_get_month(date) = 9 and date_get_day(date) = 22) or 
-    date_get_month(date) = 3 and (date_get_day(date) = 13 or
-    date_get_day(date) = 24)
-    {menutheme = "DS"}
-
-switch(menutheme)
-{   default: { //Default
-    space = 64;
-    }break;
-    case "DS": { //DS
-    space = 64;
-    }break;
-}
-
-START = 0;
-PLAY = 1;
-    PRACTICE = 1;
-    DUEL = 2;
-    CANCEL0 = 3;
-TOURNAMENT = 2;
-OPTIONS = 3;
-    FULLSCREEN = 1;
-    SOUND = 2;
-    KEYBINDING = 3;
-    CANCEL1 = 4;
-CREDIT = 4;
-QUIT = 5;
-
-chapter = 0;
-mpos = 1;
-
-menustart[START,PLAY] = "Play";
-menustart[START,TOURNAMENT] = "Tournament"
-menustart[START,OPTIONS] = "Options";
-menustart[START,CREDIT] = "Credit";
-menustart[START,QUIT] = "Exit";
-
-menustart[PLAY,DUEL] = "Duel"
-menustart[PLAY,PRACTICE] = "Practice"
-menustart[PLAY,CANCEL0] = "Cancel"
-
-menustart[OPTIONS,FULLSCREEN] = "Fullscreen"
-menustart[OPTIONS,SOUND] = "Sound"
-menustart[OPTIONS,KEYBINDING] = "Controls"
-menustart[OPTIONS,CANCEL1] = "Cancel"
-
-enum menustate {
-    Start,
-    Play,
-    Tournament,
-    Options
-}
+menugrid = ds_grid_create(10,10)
 
 menustates = menustate.Start;
 
@@ -144,7 +91,8 @@ switch(input){
     case 0:{break;}
     case 1:{
         scr_input_shift();
-        var movey = inp_d[1] - inp_d[3] - sign(inp_yattack) - sign(inp_xmove);
+        var movey = inp_d[1] - inp_d[3] - sign(inp_yattack) - sign(inp_ymove);
+        var mobex = inp_d[0] - inp_d[2] - sign(inp_xattack) - sign(inp_xmove);
         if movey != 0 and alarm[11] = -1 {
             alarm[11] = room_speed * 0.075
             mpos -= movey;
@@ -154,8 +102,11 @@ switch(input){
 
 //****Navigate*through*menus****//
 var {in = max(inp_b[3]); out = max(inp_b[0])}
-if out {chapter = START;} else
-if in {switch(menustart[chapter,mpos]){
+
+if (in or out)  {
+
+if out and alarm[11] = -1 {chapter = START;} else
+if in and alarm[11] = -1 {switch(menustart[chapter,mpos]){
 case "Start":   {break;}
     case "Play":    {if in {chapter = PLAY;} break;}
         case "Duel":        {if in {} break;}
@@ -170,12 +121,15 @@ case "Start":   {break;}
         case "Cancel":      {if in {chapter = START;} break;}
 }}
 
+alarm[11] = room_speed * 0.075;
+}
+
 //****Advanced*Menu****//
 switch(menustates){
-    case menustate.Start:     break;
-    case menustate.Play:          break;
-    case menustate.Tournament:    break;
-    case menustate.Options:
+    case menustate.Start:       break;
+    case menustate.Play:        break;
+    case menustate.Tournament:  break;
+    case menustate.Options:     break;
 }
 </string>
           </argument>
