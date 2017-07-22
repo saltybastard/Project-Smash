@@ -12,7 +12,7 @@ switch (place)
         moveh/seconds_passed,inp_xmove) * seconds_passed;
 
         ///Jump
-        if inp_b[3] and !place_meeting(x+moveh*ground_jump_xreduct,y-ground_jump*seconds_passed,obj_solid){
+        if inp_bpressed[3] and !place_meeting(x+moveh*ground_jump_xreduct,y-ground_jump*seconds_passed,obj_solid){
             moveh += moveh*ground_jump_xreduct;
             movev -= ground_jump*seconds_passed; 
             

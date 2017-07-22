@@ -79,7 +79,7 @@ place = places.Air
             <kind>1</kind>
             <string>switch (state)
 {
-    case states.Normal: /*scr_controller_input();*/ scr_keyboard_input(); scr_input_interpreter(); scr_hero_her0(); break;
+    case states.Normal: scr_input_shift(); scr_input_interpreter(); scr_hero_her0(); break;
 //    case states.Attacking: scr_hero_Attacking(); break;
 //    case states.Stunned: scr_hero_Stunned(); break;
 }
