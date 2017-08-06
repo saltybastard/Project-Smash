@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = room_width/2
-y = room_height/2
+            <string>Center();
 xshake = 0;
 yshake = 0;
 
@@ -101,7 +100,7 @@ n = 1;
         <arguments>
           <argument>
             <kind>9</kind>
-            <script>scr_window_resize</script>
+            <script>scr_WindowResize</script>
           </argument>
           <argument>
             <kind>0</kind>

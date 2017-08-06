@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>9</kind>
-            <script>scr_center_object</script>
+            <script>Center</script>
           </argument>
           <argument>
             <kind>0</kind>

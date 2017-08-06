@@ -44,13 +44,11 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="System">
-      <script>scripts\scr_center_object.gml</script>
-      <script>scripts\scr_window_resize.gml</script>
+      <script>scripts\scr_WindowResize.gml</script>
       <script>scripts\scr_enumerator.gml</script>
-      <script>scripts\scr_startmenu.gml</script>
     </scripts>
     <scripts name="Movement">
-      <script>scripts\scr_acc_deacc.gml</script>
+      <script>scripts\scr_AccDeacc.gml</script>
     </scripts>
     <scripts name="Hero Script">
       <script>scripts\scr_hero_her0.gml</script>
@@ -62,6 +60,14 @@
       <script>scripts\scr_collision_arc.gml</script>
       <script>scripts\scr_move_smooth_arc.gml</script>
     </scripts>
+    <scripts name="Common">
+      <script>scripts\JumpInDirection.gml</script>
+      <script>scripts\Chance.gml</script>
+      <script>scripts\Wrap.gml</script>
+      <script>scripts\Wave.gml</script>
+      <script>scripts\Approach.gml</script>
+      <script>scripts\Center.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
@@ -72,9 +78,9 @@
       <object>objects\obj_solid</object>
     </objects>
     <objects name="System">
-      <object>objects\obj_camera_and_gamemaster</object>
-      <object>objects\obj_menu</object>
+      <object>objects\obj_CameraGamemaster</object>
       <object>objects\obj_control</object>
+      <object>objects\obj_mainmenu</object>
     </objects>
     <objects name="Plattform">
       <object>objects\plattform_0</object>
@@ -86,11 +92,11 @@
     </objects>
   </objects>
   <rooms name="rooms">
-    <rooms name="Start Menu">
-      <room>rooms\room_start</room>
-    </rooms>
     <rooms name="Arena">
       <room>rooms\arena_xp</room>
+    </rooms>
+    <rooms name="Start Menu">
+      <room>rooms\room_start</room>
     </rooms>
   </rooms>
   <help>

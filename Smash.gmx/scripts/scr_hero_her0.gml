@@ -8,8 +8,7 @@ switch (place)
     case places.Ground: {
 /****************************************************************************************/
         ///Accelerate, Deaccelerate
-        moveh += scr_acc_deacc(ground_spd_max,ground_acc_spd,ground_deacc_rate,ground_deacc_spd,
-        moveh/seconds_passed,inp_xmove) * seconds_passed;
+        moveh += scr_AccDeacc(moveh/seconds_passed,ground_spd_max,true,ground_acc_spd,ground_deacc_spd,inp_xmove,ground_deacc_rate) * seconds_passed;
 
         ///Jump
         if inp_bpressed[3] and !place_meeting(x+moveh*ground_jump_xreduct,y-ground_jump*seconds_passed,obj_solid){
@@ -32,8 +31,7 @@ switch (place)
     case places.Air: {
 /****************************************************************************************/
         ///Fly left or right
-        moveh += scr_acc_deacc(air_spd_max,air_acc_spd,air_deacc_rate,air_deacc_spd,
-        moveh/seconds_passed,inp_xmove) * seconds_passed;
+        moveh += scr_AccDeacc(moveh/seconds_passed,air_spd_max,true,air_acc_spd,air_deacc_spd,inp_xmove,air_deacc_rate) * seconds_passed;
 
         ///Fall
         movev += gravel*seconds_passed;

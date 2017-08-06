@@ -31,12 +31,12 @@ movev = 0;
 ground_spd_max = 500;
 ground_acc_spd = 50;
 ground_deacc_rate = 0.1;
-ground_deacc_spd = 5;
+ground_deacc_spd = 30;
 
 ground_jump = 750;
 ground_jump_xreduct = 0.1;
 
-air_spd_max = 500;
+air_spd_max = 300;
 air_acc_spd = 15;
 air_deacc_rate = 0.01;
 air_deacc_spd = 2;
@@ -164,8 +164,9 @@ xx = string(moveh);
 zz = string(movev);
 rr = ","
 draw_set_font(font0);
-draw_text(x,y,yy)
+draw_text(x,y,yy);
 draw_text(x-16,y-64,xx+rr+zz)
+draw_text(x-8,y-80,string(sign(inp_xmove+inp_ymove)))
 
 </string>
           </argument>

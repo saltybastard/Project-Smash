@@ -33,8 +33,8 @@ menugrid = ds_grid_create(10,10)
 menustates = menustate.Start;
 
 //***TEMPORARY CODE***//
-device = 0;
-gamepad_set_axis_deadzone(device, 0.2);
+
+
 //********************//
 
 scr_input_zero();
@@ -92,7 +92,10 @@ switch(input){
     case 1:{
         scr_input_shift();
         var movey = inp_d[1] - inp_d[3] - sign(inp_yattack) - sign(inp_ymove);
+<<<<<<< HEAD
         var mobex = inp_d[0] - inp_d[2] - sign(inp_xattack) - sign(inp_xmove);
+=======
+>>>>>>> ada7133059a63d2289dc2e47f381e3b098354f7b
         if movey != 0 and alarm[11] = -1 {
             alarm[11] = room_speed * 0.075
             mpos -= movey;
@@ -101,16 +104,22 @@ switch(input){
 }break;}}
 
 //****Navigate*through*menus****//
+<<<<<<< HEAD
 var {in = max(inp_b[3]); out = max(inp_b[0])}
 
 if (in or out)  {
 
 if out and alarm[11] = -1 {chapter = START;} else
 if in and alarm[11] = -1 {switch(menustart[chapter,mpos]){
+=======
+var {in = max(inp_bpressed[3]); out = max(inp_bpressed[0])}
+if out {chapter = START;} else
+if in {switch(menustart[chapter,mpos]){
+>>>>>>> ada7133059a63d2289dc2e47f381e3b098354f7b
 case "Start":   {break;}
     case "Play":    {if in {chapter = PLAY;} break;}
         case "Duel":        {if in {} break;}
-        case "Practice":    {if in {} break;}
+        case "Practice":    {if in {room_goto(arena_xp)} break;}
         case "Tournament":  {if in {} break;}
     case "Options":  {if in {chapter = OPTIONS;} break;}
         case "Fullscreen":  {if in {} break;}
@@ -130,6 +139,60 @@ switch(menustates){
     case menustate.Play:        break;
     case menustate.Tournament:  break;
     case menustate.Options:     break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="75">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>show_debug_message("Event = " + async_load[? "event_type"]);        // Debug cocde so you can see which event has been
+show_debug_message("Pad = " + string(async_load[? "pad_index"]));   // triggered and the pad associated with it.
+
+switch(async_load[? "event_type"])             // Parse the async_load map to see which event has been triggered
+{
+case "gamepad discovered":                     // A game pad has been discovered
+    var pad = async_load[? "pad_index"];       // Get the pad index value from the async_load map
+    gamepad_set_axis_deadzone(pad, 0.5);       // Set the "deadzone" for the axis
+    gamepad_set_button_threshold(pad, 0.1);    // Set the "threshold" for the triggers
+    if !(instance_exists(player[pad]))         // Check to see if an instance is associated with this pad index
+        {
+        // Create a player object and assign it a pad number
+        player[pad] = instance_create(64 + random(room_width - 128), 64 + random(room_height - 128), obj_Player);
+        with (player[pad])
+            {
+            image_index = pad;
+            device = pad;
+            }
+        }
+    break;
+case "gamepad lost":                           // Gamepad has been removed or otherwise disabled
+    var pad = async_load[? "pad_index"];       // Get the pad index
+    if (instance_exists(player[pad]))          // Check for a player instance associated with the pad and remove it
+        {
+        with (player[pad])
+            {
+            instance_destroy();
+            }
+        player[pad] = noone;                   // Set the controller array to "noone" so it detects a new pad being connected
+        }
+    break;
 }
 </string>
           </argument>
