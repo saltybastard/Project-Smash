@@ -50,7 +50,7 @@ if valve_a = 0 {
 ///Accelerate
    if sign(valve_a) + sign(current) = 0 { var change = (amount_a + amount_b) * 2 * valve_a;
     }else{ var change = amount_a * valve_a; }
-    
+
     if current + change >= max_value {return(sign(current) * (max_value - abs(current))); exit;}
     return(change);exit;
 }

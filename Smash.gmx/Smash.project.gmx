@@ -49,16 +49,16 @@
     </scripts>
     <scripts name="Movement">
       <script>scripts\scr_AccDeacc.gml</script>
-    </scripts>
-    <scripts name="Hero Script">
-      <script>scripts\scr_hero_her0.gml</script>
+      <script>scripts\scr_NoCollisionNoJump.gml</script>
+      <script>scripts\scr_Jump.gml</script>
     </scripts>
     <scripts name="Input">
       <script>scripts\scr_controller_input.gml</script>
     </scripts>
-    <scripts name="Archive">
+    <scripts name="Trash">
       <script>scripts\scr_collision_arc.gml</script>
       <script>scripts\scr_move_smooth_arc.gml</script>
+      <script>scripts\scr_hero_her0_unused.gml</script>
     </scripts>
     <scripts name="Common">
       <script>scripts\JumpInDirection.gml</script>

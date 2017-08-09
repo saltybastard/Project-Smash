@@ -43,8 +43,6 @@ switch (place)
         }
         if 2 > movev and movev > -2 { movev += gravel * seconds_passed;}
         
-        
-        
         scr_collision(places.Air);
 /****************************************************************************************/
     } break;

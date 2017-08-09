@@ -12,3 +12,9 @@ enum states {
     Attacking,
     Stunned
 }
+
+enum stances {
+    Stand,
+    Slide,
+    Duck
+}

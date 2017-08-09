@@ -96,6 +96,11 @@ inp_b[1] = keyboard_check(ord('X'));
 inp_b[2] = keyboard_check(ord('C'));
 inp_b[3] = keyboard_check(vk_space) or keyboard_check(vk_enter);
 
+inp_bpressed[0] = keyboard_check_pressed(ord('Z')) or keyboard_check_pressed(vk_backspace);
+inp_bpressed[1] = keyboard_check_pressed(ord('X'));
+inp_bpressed[2] = keyboard_check_pressed(ord('C'));
+inp_bpressed[3] = keyboard_check_pressed(vk_space) or keyboard_check_pressed(vk_enter);
+
 #define scr_mouse_input
 //Binds mouse to controller buttons
 inp_b[3] = mb_left;
