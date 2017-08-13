@@ -49,8 +49,9 @@
     </scripts>
     <scripts name="Movement">
       <script>scripts\scr_AccDeacc.gml</script>
-      <script>scripts\scr_NoCollisionNoJump.gml</script>
+      <script>scripts\scr_NoMeeting.gml</script>
       <script>scripts\scr_Jump.gml</script>
+      <script>scripts\scr_Collision.gml</script>
     </scripts>
     <scripts name="Input">
       <script>scripts\scr_controller_input.gml</script>
@@ -58,7 +59,6 @@
     <scripts name="Trash">
       <script>scripts\scr_collision_arc.gml</script>
       <script>scripts\scr_move_smooth_arc.gml</script>
-      <script>scripts\scr_hero_her0_unused.gml</script>
     </scripts>
     <scripts name="Common">
       <script>scripts\JumpInDirection.gml</script>

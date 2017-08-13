@@ -28,6 +28,73 @@
             <string>moveh = 0;
 movev = 0;
 
+Rspd[0] = 500;        //Run Speed Max
+Rspd[1] = 50;        //Run Speed Accelerating
+Rspd[2] = 30;       //Run speed Deaccelerating
+Rspd[3] = 0.1;     //Run Speed Deaccelerating Rate
+
+Gjump[0] = 750;  //Ground Jump Speed
+Gjump[1] = 0.1; //Ground Jump Horisontal Multiplier
+
+JumpsExtra = 1;
+JumpsUsed = 0;
+
+inp_YCrawlTreshold = 0.5;
+
+Cspd[0] = 100;              //Crawl Speed Max
+Cspd[1] = 70;              //Crawl Speed Accelerating
+Cspd[2] = 500;            //Crawl Speed Deaccelerating
+Cspd[3] = 0;             //Crawl Speed Deaccelerating Rate
+
+Sspd[2] = 10;          //Slide Speed Deaccelerating
+Sspd[3] = 0.05;       //Slide Speed Deaccelerating Rate
+
+Aspd[0] = 300;      //Air Speed Max
+Aspd[1] = 15;      //Air Speed Accelerating
+Aspd[2] = 2;      //Air Speed Deaccelerating
+Aspd[3] = 0.01;  //Air Speed Deaccelerating Rate
+
+gravel = 15;//m/s^2
+hover_speed = 200
+fall_speed = 400 
+
+///All Inputs is off 
+inp_ymove = 0;
+inp_xmove = 0;
+/*********TEMPORARY CODE*********/
+device = 0;
+gamepad_set_axis_deadzone(device, 0.2);
+state = states.Normal
+place = places.Air
+global.gap = 0;
+show_debug_overlay(true);
+counting = 0;
+/*********TEMPORARY CODE*********/
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*
+moveh = 0;
+movev = 0;
+
 run_spd_max = 500;
 run_acc_spd = 50;
 run_deacc_rate = 0.1;
@@ -61,6 +128,7 @@ fall_speed = 400
 inp_ymove = 0;
 inp_xmove = 0;
 /*********TEMPORARY CODE*********/
+/*
 device = 0;
 gamepad_set_axis_deadzone(device, 0.2);
 state = states.Normal
@@ -91,155 +159,132 @@ global.gap = 0;
           <argument>
             <kind>1</kind>
             <string>///The main mechanics with her0
-var seconds_passed = delta_time/1000000;
-var seconds_moveh = moveh/seconds_passed;
-
+var timesync = delta_time/1000000;
+var moveh_timesync = moveh / timesync;
 switch (state){
 
-    case states.Stunned: {} break;
-    /*****************************************************************************************************
-    *****************************************************************************************************/
-    
-    case states.Attacking: {} break;
-    /*****************************************************************************************************
-    *****************************************************************************************************/
-    
-    case states.Normal: scr_input_shift(); scr_input_interpreter();{ 
-    /*****************************************************************************************************
-    *****************************************************************************************************/
-        
-        if place_meeting(x,y+1,obj_solid) {place = places.Ground; movev = 0;}
-        else {place = places.Air;}
+case states.Stunned: {} break;
+/*****************************************************************************************************
+*****************************************************************************************************/
 
-        switch (place)
-        {
-            case places.Ground: {
-            /*****************/
+case states.Attacking: {} break;
+/*****************************************************************************************************
+*****************************************************************************************************/
+
+case states.Normal: scr_input_shift(); scr_input_interpreter();{ 
+/*****************************************************************************************************
+*****************************************************************************************************/
+    
+    if place_meeting(x,y+1,obj_solid) {place = places.Ground; movev = 0;}
+    else {place = places.Air;}
+
+    switch (place)
+    {
+        case places.Ground: {
+        /*****************/
+        
+            //Determing in what stance the hero is in and corrects y axis
+            var scale = image_yscale;
+            if inp_ymove &gt; inp_YCrawlTreshold {
+                if abs(moveh_timesync) &lt; Cspd[0] {
+                stance = stances.Duck;
+                image_yscale = 0.5;
+                }
+                if abs(moveh_timesync) &gt; Cspd[0] and stance != stances.Duck {
+                stance = stances.Slide;
+                image_yscale = 0.1;
+                }
+            } else {
+                stance = stances.Stand;
+                image_yscale = 1;
+            }
+            var diff = ((scale - image_yscale) * sprite_height);
+            if scale != image_yscale {
+                y+=diff;
+                scr_NoMeeting(ceil(abs(diff)),true);
+            }
             
-                //Determing in what stance the hero is in and corrects y axis
-                var scale = image_yscale;
-                if inp_ymove &gt; inp_YCrawlTreshold {
-                    if abs(seconds_moveh) &lt; crawl_spd_max {
-                    stance = stances.Duck;
-                    image_yscale = 0.5;
-                    }
-                    if abs(seconds_moveh) &gt; crawl_spd_max and stance != stances.Duck {
-                    stance = stances.Slide;
-                    image_yscale = 0.1;
-                    }
-                } else {
-                    stance = stances.Stand;
-                    image_yscale = 1;
-                }
-                var diff = ((scale - image_yscale) * sprite_height);
-                if scale != image_yscale {
-                    y+=diff;
-                    scr_NoCollisionNoJump(ceil(abs(diff)));
-                }
+            switch (stance){
+            
+                case stances.Duck: {
+                /***/
                 
-                switch (stance){
+                        ///Accelerate, Deaccelerate Crawling
+                        moveh += scr_AccDeacc(moveh,Cspd[0],true,Cspd[1],Cspd[2],inp_xmove,Cspd[3],timesync)
                 
-                    case stances.Duck: {
-                    /***/
+                        ///Jump
+                        if inp_bpressed[3] {
+                            scr_Jump(Gjump[1],Gjump[0],obj_solid,timesync);
+                            exit;
+                        }
+
+                        scr_Collision(places.Ground);
                     
-                            ///Accelerate, Deaccelerate Crawling
-                            moveh += scr_AccDeacc(seconds_moveh,crawl_spd_max,true,crawl_acc_spd,crawl_deacc_spd,inp_xmove,0) * seconds_passed;
-                    
-                            ///Jump
-                            if inp_bpressed[3] and !place_meeting(x+moveh*ground_jump_xreduct,
-                            y-ground_jump*seconds_passed,obj_solid){
-                                moveh += moveh*ground_jump_xreduct;
-                                movev -= ground_jump*seconds_passed; 
-                                
-                                var xtarg = x+moveh;
-                                var ytarg = y+movev;
-                                
-                                x = xtarg;
-                                y = ytarg;
-                                
-                                place = places.Air;
-                                exit;
-                            }
-                    
-                            scr_collision(places.Ground);
+                } break;
+                
+                case stances.Slide: {
+                /***/
+                
+                        ///Accelerate, Deaccelerate, Sliding
+                        moveh += scr_AccDeacc(moveh,0,false,0,Sspd[2],0,Sspd[3],timesync)
                         
-                    } break;
-                    
-                    case stances.Slide: {
-                    /***/
-                    
-                            ///Accelerate, Deaccelerate Crawling
-                            moveh += scr_AccDeacc(seconds_moveh,0,false,0,slide_deacc_spd,0,slide_deacc_rate) * seconds_passed;
-                            
-                            scr_collision(places.Ground);
-                            
-                    } break;
-                    
-                    
-                    case stances.Stand: {
-                    /***/
+                        scr_Collision(places.Ground);
+                        
+                } break;
+                
+                
+                case stances.Stand: {
+                /***/
 
-                            ///Accelerate, Deaccelerate
-                            moveh += scr_AccDeacc(seconds_moveh,run_spd_max,true,
-                            run_acc_spd,run_deacc_spd,inp_xmove,run_deacc_rate) * seconds_passed;
-                    
-                            ///Jump
-                            if inp_bpressed[3] and !place_meeting(x+moveh*ground_jump_xreduct,
-                            y-ground_jump*seconds_passed,obj_solid){
-                                moveh += moveh*ground_jump_xreduct;
-                                movev -= ground_jump*seconds_passed; 
-                                
-                                var xtarg = x+moveh;
-                                var ytarg = y+movev;
-                                
-                                x = xtarg;
-                                y = ytarg;
-                                
-                                place = places.Air;
-                                exit;
-                            }
-                    
-                            scr_collision(places.Ground);
-                    
-                    } break;
-                    
-                } 
+                        ///Accelerate, Deaccelerate
+                        moveh += scr_AccDeacc(moveh,Rspd[0],true,Rspd[1],Rspd[2],inp_xmove,Rspd[3],timesync);
+                
+                        ///Jump
+                        if inp_bpressed[3] {
+                            scr_Jump(Gjump[1],Gjump[0],obj_solid,timesync);
+                            exit;
+                        }
+                
+                        scr_Collision(places.Ground);
+                
+                } break;
+                
+            } 
 
-            } break;
-            case places.Air: {
-            /*****************/
-            
-                ///Fly left or right
-                moveh += scr_AccDeacc(moveh/seconds_passed,air_spd_max,true,
-                air_acc_spd,air_deacc_spd,inp_xmove,air_deacc_rate) * seconds_passed;
+        } break;
+        case places.Air: {
+        /*****************/
         
-                ///Air Jump
-                if inp_bpressed[3] and JumpsUsed++ &lt; JumpsExra
-                {
-                    
-                }
+            ///Fly left or right
+            moveh += scr_AccDeacc(moveh,Aspd[0],true,Aspd[1],Aspd[2],inp_xmove,Aspd[3],timesync);
+    
+            ///Air Jump
+            if inp_bpressed[3] and JumpsUsed++ &lt; JumpsExtra
+            {
                 
-                ///Fall
-                movev += gravel*seconds_passed;
-                if !inp_b[3] {
-                    if movev &lt; 0 {movev = max(movev,-ground_jump/2*seconds_passed);}
-                    if movev &gt; 10 { movev += gravel * seconds_passed;}
-                } else {
-                    movev = min(movev,hover_speed*seconds_passed);
-                }
-                if 2 &gt; movev and movev &gt; -2 { movev += gravel * seconds_passed;}
-                
-                scr_collision(places.Air);
-
-            } break;
+            }
             
-            case places.Wall: {} break;
-            /*****************/
-            case places.Edge: {} break;
-            /*****************/
-        }
+            ///Fall
+            movev += gravel*timesync;
+            if !inp_b[3] {
+                if movev &lt; 0 {movev = max(movev,-Gjump[0]/2*timesync);}
+                if movev &gt; 10 { movev += gravel * timesync;}
+            } else {
+                movev = min(movev,hover_speed*timesync);
+            }
+            if 2 &gt; movev and movev &gt; -2 { movev += gravel * timesync;}
+            
+            scr_Collision(places.Air);
 
-    } break;
+        } break;
+        
+        case places.Wall: {} break;
+        /*****************/
+        case places.Edge: {} break;
+        /*****************/
+    }
+
+} break;
 
 }
 </string>
@@ -319,20 +364,19 @@ switch(place){
     case places.Ground: yy = "Ground"; break;
     case places.Air: yy = "Air"; break;
 }
-xx = string(moveh);
-zz = string(movev);
+xx = string(moveh/(delta_time/1000000));
+zz = string(movev/(delta_time/1000000));
 rr = ","
+
+var xview = view_xport[0];
+var yview = view_yport[0];
+
 draw_set_font(font0);
-draw_text(x,y-50,yy);
-draw_text(x-16,y-64,xx+rr+zz)
-draw_text(x-8,y-80,string(global.gap));
+draw_text(xview+16,yview+32,yy);
+draw_text(xview+16,yview+16,xx+rr+zz)
+draw_text(xview+16,yview+48,string(global.gap));
 
-
-        var xtarg = x+lengthdir_x(50, 90+ radtodeg(2*pi*inp_xattack));
-        var ytarg = y+lengthdir_y(50, 90+ radtodeg(2*pi*inp_xattack));
-        
-        draw_circle(xtarg, ytarg, 10, true)
-
+draw_text(x,y,string(delta_time/1000000))
 </string>
           </argument>
         </arguments>
