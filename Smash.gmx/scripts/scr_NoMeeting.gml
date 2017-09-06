@@ -66,4 +66,3 @@ if !place_meeting(xtarg,ytarg+1,obj_solid) and argument[1]{
     exit;
 }
 
-
